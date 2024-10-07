@@ -1,0 +1,240 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    margin: 0;
+    padding: 0px;
+    text-align: center; /* Центруем текст */
+}
+html{
+    scroll-behavior: smooth;
+}
+
+.backimage{
+ position: relative;
+ top: 300;
+  z-index: -1
+}
+.art{
+    font-family:Island Moments;
+    color: #9DDE9D;
+    font-size:200px;
+    position: relative;
+    bottom: 1000px;
+    right: 500px;
+}
+.artt1{
+    font-size: 128px;
+    font-family:Playfair Display SC;
+    color: white;
+    position: relative;
+    bottom: 1100px;
+    right: 500px;
+}
+.artt2{
+    font-size: 128px;
+    font-family:Playfair Display SC;
+    color: #039302;
+    position: relative;
+    bottom: 1400px;
+    left: 730px;
+    width: 800px;
+}
+.artt{
+    font-size: 128px;
+    font-family:Playfair Display SC;
+    color: #039302;
+    position: relative;
+    bottom: 1600px;
+    left: 130px;
+    width: 800px;
+}
+.zak{
+    font-size: 64px;
+
+    
+    color: black;
+    text-align: center;
+    font-family:Playfair Display SC ;
+    text-decoration: none;
+}
+.zak1{
+    background-color: #059D04;
+    border-radius: 27px;
+    width: 520px;
+    height: 110px;
+    text-align: center;
+    position: relative;
+    bottom: 1750px;
+    left: 100px;
+
+}
+.mdi{
+    position: relative;
+    top: 10px;
+}
+
+.rec{
+    position: relative;
+    bottom: 1700px;
+    right: 100px;
+    transition: 0.3s;
+}
+.rec1{
+    position: relative;
+    bottom: 1700px;
+    right: 50px;
+    transition: 0.3s;
+}
+
+.rec2{
+    position: relative;
+    bottom: 1700px;
+    left: 50px;
+    transition: 0.3s;
+}
+.recp{
+    position: relative;
+    color: white;
+     font-size: 74px;
+     bottom: 2210px;
+    right: 600px;
+    font-family: layfair Display SC;
+}
+.recp1{
+    position: relative;
+    color: white;
+     font-size: 74px;
+     bottom: 2370px;
+    right: 50px;
+    font-family: layfair Display SC;
+}
+.recp2{
+    position: relative;
+    font-size: 74px;
+    color: white;
+    bottom: 2050px;
+    left: 550px;
+    font-family: layfair Display SC;
+}
+
+
+.emeil{
+font-size: 60px;
+color: white;
+}
+.h {
+    color: green !important;
+}
+
+.g {
+    font-size: 50px;
+}
+
+.g.h {
+    color: green; /* Убедись, что цвет меняется при наличии обоих классов */
+}
+.falling {
+    position: absolute; /* Чтобы блок не занимал места в макете */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2000px; /* Заполняет всю страницу */
+    z-index: 10; /* Более высокий z-index, чем у картинки */
+    pointer-events: none; /* Отключаем взаимодействие с мышью */
+}
+
+
+.port{
+    border: 1px solid white;
+    border-radius: 20px;
+    position: relative;
+    width: 1680px;
+    height: 825px;
+    color: white;
+    left: 100px;
+    bottom: 1300px;
+    font-family: layfair Display SC;
+    font-size: 100px;
+}
+.port img{
+    width:650px ;
+    height:650px;
+    position: relative;
+    bottom: 450px;
+    left: 600px;
+}
+.port button {
+    border: 1px solid white;
+    border-radius: 35px;
+    color: white;
+    transition: 1s;
+    width: 340px;
+    height: 100px;
+    text-decoration: none;
+    padding: 10px 20px; /* Уменьшаем padding */
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 30px; /* Немного уменьшаем шрифт */
+    margin-bottom: 10px;
+    z-index: 99;
+    cursor: pointer;
+    position: relative;
+    bottom: 500px;
+    right: 800px;
+}
+
+
+.port button:hover{
+    border: 2px solid seagreen;
+    background: green;
+   box-shadow: 0 0 10px green,
+                0 0 30px green,
+                0 0 60px green,
+                0 0 100px green;
+}
+
+section{
+    position: relative;
+    bottom: 850px;
+}
+.loading{
+    width: 100px;
+    height: 100px;
+    border: 10px solid white;
+    border-radius: 100px;
+    position: relative;
+    left: 900px;
+    bottom: 500px;
+    z-index: 21;
+    position: fixed;
+    animation: spin 2s linear infinite;
+    border-top-color: #3498db;
+    display: none;
+}
+
+ @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+.loadingback{
+    background: rgba(255, 255, 255, 0.2)
+    border-radius: 30px;
+    
+    width: 400px;
+    height: 500px;
+    position: relative;
+    left: 750px;
+    bottom: 300px;
+    opacity: 100%;
+    border-radius: 40px;
+    z-index: 20;
+    position: fixed;
+    backdrop-filter:blur(50px);
+    display: none;
+
+}
