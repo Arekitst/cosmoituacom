@@ -1,273 +1,235 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Login</title>
-	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-	<style type="text/css">
-		body {
-			display: flex;
-			align-items: center;
-			min-height: 100vh;
-			justify-content: center;
-			background: green;
-		}
-		
-		.name, .pass, .file-input {
-			border-radius: 10px;
-			font-size: 20px;
-			margin-bottom: 10px;
-			padding: 10px;
-		}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: #f0f0f0;
+        }
 
-		.main {
-			background: lightgray;
-			border: 1px solid black;
-			width: 400px;
-			height: 550px;
-			align-items: center;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			position: relative;
-		}
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
 
-		.btn {
-			text-decoration: none;
-			border: 1px solid black;
-			border-radius: 20px;
-			font-size: 30px;
-			cursor: pointer;
-			padding: 10px 20px;
-			background-color: #3498db;
-			color: white;
-		}
+        input {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-		.loader {
-			display: none;
-			border: 5px solid #f3f3f3;
-			border-radius: 50%;
-			border-top: 5px solid #3498db;
-			width: 50px;
-			height: 50px;
-			animation: spin 1s linear infinite;
-			margin-top: 20px;
-		}
+        button {
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+        }
 
-		@keyframes spin {
-			0% { transform: rotate(0deg); }
-			100% { transform: rotate(360deg); }
-		}
+        .link {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            color: #3498db;
+            cursor: pointer;
+        }
 
-		.success {
-			display: none;
-			color: green;
-			font-size: 24px;
-			margin-top: 20px;
-		}
+        .file-list {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
 
-		.checkmark {
-			display: none;
-			width: 50px;
-			height: 50px;
-			border-radius: 50%;
-			background-color: green;
-			position: relative;
-			margin-top: 20px;
-		}
+        .file-item {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            background-color: #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
 
-		.checkmark:after {
-			content: '✔';
-			position: absolute;
-			font-size: 30px;
-			color: white;
-			top: 5px;
-			left: 10px;
-		}
+        .file-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
 
-		.result {
-			display: none;
-			font-size: 24px;
-			margin-top: 20px;
-		}
+        .hidden {
+            display: none;
+        }
 
-		.avatar {
-			display: none;
-			width: 50px;
-			height: 50px;
-			background-color: blue;
-			border-radius: 50%;
-			margin-right: 10px;
-			overflow: hidden;
-		}
+        #logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
 
-		.avatar img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-		}
-
-		.user-info {
-			display: none;
-			display: flex;
-			align-items: center;
-			margin-top: 20px;
-			font-size: 24px;
-		}
-
-		.logout-btn {
-			display: none;
-			margin-top: 20px;
-			padding: 10px 20px;
-			background-color: red;
-			color: white;
-			border: none;
-			cursor: pointer;
-			border-radius: 10px;
-			font-size: 20px;
-		}
-	</style>
+    </style>
 </head>
 <body>
-	<div class="main">
-		<h1>Login</h1>
-		<div class="form">
-			<div>
-				<input class="name" type="text" name="name" placeholder="name">
-				<box-icon name='user'></box-icon>
-			</div>
-			<div>
-				<input class="pass" type="password" name="pass" placeholder="Password">
-				<box-icon name='lock-alt'></box-icon>
-			</div>
-			<div>
-				<input class="file-input" type="file" name="avatar" accept="image/*">
-			</div>
-			<button class="btn">Login</button>
-		</div>
-		<div class="loader"></div>
-		<div class="checkmark"></div>
-		<div class="result"></div>
-		<div class="user-info">
-			<div class="avatar"></div>
-			<div class="user-name"></div>
-		</div>
-		<button class="logout-btn">Выйти</button>
-	</div>
 
-	<script type="text/javascript">
-		// Находим элементы
-		const loginButton = document.querySelector('.btn');
-		const nameInput = document.querySelector('.name');
-		const passInput = document.querySelector('.pass');
-		const fileInput = document.querySelector('.file-input');
-		const loader = document.querySelector('.loader');
-		const checkmark = document.querySelector('.checkmark');
-		const result = document.querySelector('.result');
-		const userInfo = document.querySelector('.user-info');
-		const avatar = document.querySelector('.avatar');
-		const userName = document.querySelector('.user-name');
-		const form = document.querySelector('.form');
-		const logoutButton = document.querySelector('.logout-btn');
+<div class="container" id="login-section">
+    <h2 id="form-title">Login</h2>
+    <input type="text" id="login-username" placeholder="Username">
+    <input type="password" id="login-password" placeholder="Password">
+    <button id="login-btn">Login</button>
+    <span class="link" id="register-link">Don't have an account? Register</span>
+    <p id="login-message"></p>
+</div>
 
-		// Проверка, есть ли сохранённые данные в LocalStorage
-		document.addEventListener('DOMContentLoaded', function() {
-			const savedName = localStorage.getItem('username');
-			const savedAvatar = localStorage.getItem('avatar');
+<div class="container hidden" id="register-section">
+    <h2>Register</h2>
+    <input type="text" id="register-username" placeholder="Username">
+    <input type="password" id="register-password" placeholder="Password">
+    <button id="register-btn">Register</button>
+    <span class="link" id="login-link">Already have an account? Login</span>
+    <p id="register-message"></p>
+</div>
 
-			if (savedName) {
-				// Скрываем форму, если данные уже есть
-				form.style.display = 'none';
-				userName.innerHTML = savedName;
-				userInfo.style.display = 'flex';
-				avatar.style.display = 'block';
-				logoutButton.style.display = 'block'; // Показываем кнопку выхода
+<div class="container hidden" id="file-section">
+    <button id="logout-btn">Logout</button>
+    <h3>Post Image</h3>
+    <input type="file" id="file-input">
+    <button id="post-btn">Post</button>
+    <div class="file-list" id="file-list"></div>
+</div>
 
-				if (savedAvatar) {
-					const img = document.createElement('img');
-					img.src = savedAvatar;
-					avatar.innerHTML = '';
-					avatar.appendChild(img);
-				} else {
-					avatar.style.backgroundColor = 'blue'; // Стандартный аватар
-				}
-			}
-		});
+<script>
+    // Инициализация
+    const users = JSON.parse(localStorage.getItem('users')) || {};
+    const files = JSON.parse(localStorage.getItem('files')) || [];
+    let currentUser = null;
 
-		// Добавляем обработчик клика на кнопку
-		loginButton.addEventListener('click', function() {
-			// Получаем введённые данные
-			const nameValue = nameInput.value;
-			const passValue = passInput.value;
-			const avatarFile = fileInput.files[0];
+    const loginSection = document.getElementById('login-section');
+    const registerSection = document.getElementById('register-section');
+    const fileSection = document.getElementById('file-section');
 
-			// Скрываем элементы формы
-			nameInput.style.display = 'none';
-			passInput.style.display = 'none';
-			loginButton.style.display = 'none';
-			fileInput.style.display = 'none';
+    const loginUsernameInput = document.getElementById('login-username');
+    const loginPasswordInput = document.getElementById('login-password');
+    const loginBtn = document.getElementById('login-btn');
+    const loginMessage = document.getElementById('login-message');
+    const registerLink = document.getElementById('register-link');
 
-			// Показываем анимацию загрузки
-			loader.style.display = 'block';
+    const registerUsernameInput = document.getElementById('register-username');
+    const registerPasswordInput = document.getElementById('register-password');
+    const registerBtn = document.getElementById('register-btn');
+    const registerMessage = document.getElementById('register-message');
+    const loginLink = document.getElementById('login-link');
 
-			// Через 3 секунды скрываем загрузку, показываем галочку и результат
-			setTimeout(function() {
-				loader.style.display = 'none';
-				checkmark.style.display = 'block';
-				result.innerHTML = `Username: ${nameValue}<br>Password: ${passValue}`;
-				result.style.display = 'block';
+    const fileInput = document.getElementById('file-input');
+    const postBtn = document.getElementById('post-btn');
+    const fileList = document.getElementById('file-list');
+    const logoutBtn = document.getElementById('logout-btn');
 
-				// Сохраняем данные в LocalStorage
-				localStorage.setItem('username', nameValue);
+    // Показать список файлов
+    function updateFileList() {
+        fileList.innerHTML = '';
+        files.forEach(file => {
+            const fileItem = document.createElement('div');
+            fileItem.classList.add('file-item');
+            const img = document.createElement('img');
+            img.src = file.data;
+            fileItem.appendChild(img);
+            fileList.appendChild(fileItem);
+        });
+    }
 
-				// Если аватар загружен, читаем файл и сохраняем его в LocalStorage
-				if (avatarFile) {
-					const reader = new FileReader();
-					reader.onload = function(e) {
-						localStorage.setItem('avatar', e.target.result); // Сохраняем аватар как base64
-					};
-					reader.readAsDataURL(avatarFile);
-				}
+    // Логин
+    loginBtn.addEventListener('click', () => {
+        const username = loginUsernameInput.value;
+        const password = loginPasswordInput.value;
 
-				// Через 5 секунд скрываем результат и показываем аватар с именем пользователя
-				setTimeout(function() {
-					checkmark.style.display = 'none';
-					result.style.display = 'none';
-					userInfo.style.display = 'flex';
-					userName.innerHTML = nameValue;
+        if (users[username] && users[username] === password) {
+            loginMessage.textContent = `Welcome, ${username}`;
+            currentUser = username;
+            loginSection.classList.add('hidden');
+            showFileManager();
+        } else {
+            loginMessage.textContent = 'Invalid username or password';
+        }
+    });
 
-					// Проверяем, был ли загружен файл для аватара
-					if (avatarFile) {
-						const reader = new FileReader();
-						reader.onload = function(e) {
-							const img = document.createElement('img');
-							img.src = e.target.result;
-							avatar.innerHTML = ''; // Очистим старый контент аватара
-							avatar.appendChild(img);
-							avatar.style.display = 'block';
-						};
-						reader.readAsDataURL(avatarFile); // Читаем файл как URL
-					} else {
-						// Если аватар не загружен, показываем стандартный аватар
-						avatar.style.backgroundColor = 'blue';
-						avatar.style.display = 'block';
-					}
+    // Регистрация
+    registerBtn.addEventListener('click', () => {
+        const username = registerUsernameInput.value;
+        const password = registerPasswordInput.value;
 
-					logoutButton.style.display = 'block'; // Показываем кнопку выхода
-				}, 5000);
-			}, 3000);
-		});
+        if (username && password) {
+            users[username] = password;
+            localStorage.setItem('users', JSON.stringify(users));
+            registerMessage.textContent = 'Account registered successfully!';
+        } else {
+            registerMessage.textContent = 'Please enter a username and password';
+        }
+    });
 
-		// Добавляем обработчик клика на кнопку выхода
-		logoutButton.addEventListener('click', function() {
-			// Очищаем данные из LocalStorage
-			localStorage.removeItem('username');
-			localStorage.removeItem('avatar');
+    // Показать файловый менеджер
+    function showFileManager() {
+        fileSection.classList.remove('hidden');
+        updateFileList();
 
-			// Перезагружаем страницу для возврата к форме входа
-			location.reload();
-		});
-	</script>
+        // Если текущий пользователь — администратор, показываем кнопку загрузки
+        if (currentUser === 'tim') {
+            postBtn.classList.remove('hidden');
+            fileInput.classList.remove('hidden');
+        } else {
+            postBtn.classList.add('hidden');
+            fileInput.classList.add('hidden');
+        }
+    }
+
+    // Публикация изображений
+    postBtn.addEventListener('click', () => {
+        const file = fileInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                files.push({ name: file.name, data: event.target.result });
+                localStorage.setItem('files', JSON.stringify(files));
+                updateFileList();
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Показать ссылку для регистрации
+    registerLink.addEventListener('click', () => {
+        loginSection.classList.add('hidden');
+        registerSection.classList.remove('hidden');
+    });
+
+    // Показать ссылку для логина
+    loginLink.addEventListener('click', () => {
+        registerSection.classList.add('hidden');
+        loginSection.classList.remove('hidden');
+    });
+
+    // Logout
+    logoutBtn.addEventListener('click', () => {
+        currentUser = null;
+        location.reload();
+    });
+
+    // Инициализация загрузки файлов
+    updateFileList();
+</script>
+
 </body>
 </html>
