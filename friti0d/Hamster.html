@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Hamster Combat</title>
+	<style type="text/css">
+		button{
+			position: relative;
+			left: 60px;
+		}
+	</style>
+</head>
+<body>
+	<header></header>
+	<main>
+		<div>
+			<h1>Тап тап тап по хомяку</h1>
+			<h1 id="counter">0</h1>
+		<button id="clickButton" style="border-radius: 50px; width: 1000hv; height: 1000hv;">
+			<img src="icon.webp">
+		</button>
+		<audio controls>
+  <source src="1723908604_msbsthmstrcrmnl.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+	</div>
+	</main>
+	<script type="text/javascript">
+		 let count = 0;
+		 
+        const counterElement = document.getElementById('counter');
+        const button = document.getElementById('clickButton');
+
+        button.addEventListener('click', function() {
+            count++;
+            counterElement.textContent = count + '$$$';
+        });
+	</script>
+</body>
+</html>
